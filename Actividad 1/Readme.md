@@ -238,7 +238,7 @@ Docker permite contenerizar la aplicación y desplegarla en diferentes entornos 
 3. **Verificamos que la aplicación se despliegue correctamente localmente usando Docker:**
 
     - Abrimos un navegador web y accedemos a [http://localhost:3000](http://localhost:3000) para verificar que la aplicación esté funcionando.
-![[screenshot1.png]]
+![screenshot1](https://github.com/al-2100/CC3S2/blob/main/Actividad%201/screenshot1.png)
 ## 3. Automatización
 
 ### 3.1 Automatiza la Configuración y Gestión del Entorno Local usando Docker Compose

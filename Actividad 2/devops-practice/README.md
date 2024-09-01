@@ -47,7 +47,7 @@ organización?**
 
  ![app](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/app.png?raw=true)
 
- ![test](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/test.png?raw=true)
+ ![app-test](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/app-test.png?raw=true)
  
  ![package](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/package.png?raw=true)
 ## 2. Implementación de DevSecOps
@@ -195,3 +195,20 @@ Al implementar DevSecOps en una aplicación web sencilla en Node.js, reflexionam
     
 
 En conclusión, cada componente del flujo de trabajo DevSecOps contribuye a un proceso de desarrollo más seguro, eficiente y visible. Cada paso que dimos nos ayudó a mejorar la seguridad, reducir errores y trabajar de manera más eficiente. Esto nos enseñó que, al integrar todos estos componentes, podemos crear un proceso de desarrollo que sea realmente efectivo y seguro.
+
+## 6. Correciones y consideraciones finales
+
+Posterior a la experiencia de la actividad y al subirla finalizada a github, se realizaron las siguientes observaciones y ajustes en este orden:
+
+1. Se observa que el workflow falla
+   ![directorio](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/directorio.png?raw=true)
+3. Se agregó la configuración para los directorios en el flujo de trabajo en `.github/workflows/ci.yml`, la documentación del paso 2 ya fue actualizada.
+4. Se observa que el workflow no pasa de `run tests` a pesar que pasa el test
+   ![test](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/test.png?raw=true)
+5. Tras muchos intentos se modifica app.js y app.test.js para que se cierre correctamente el test
+   ![test2](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/test2.png?raw=true)
+   
+   ![app2](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/app2.png?raw=true)
+7. Funciona
+   
+   ![fix](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/fix.png?raw=true)

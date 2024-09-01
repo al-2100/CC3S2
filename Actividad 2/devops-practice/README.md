@@ -62,37 +62,41 @@ organización?**
 2. Automatizar el análisis de seguridad en GitHub Actions:
    - Actualizar el archivo `.github/workflows/ci.yml` para incluir un paso de seguridad:
    ```yaml
-   name: CI Pipeline
-   on:
-     push:
-       branches:
-         - main
-     pull_request:
-       branches:
-         - main
+   name: CI Pipeline  
+   on:  
+     push:  
+       branches:  
+         - main  
+     pull_request:  
+       branches:  
+         - main  
+     
+   jobs:  
+     build:  
+       runs-on: ubuntu-latest  
+       steps:  
+         - name: Checkout code  
+           uses: actions/checkout@v2  
+  
+         - name: Set up Node.js  
+           uses: actions/setup-node@v2  
+           with:  
+             node-version: '14'  
+     
+         - name: Install dependencies  
+           run: npm install  
+           working-directory: 'Actividad 2/devops-practice/'  
+     
+         - name: Run tests  
+           run: npm test  
+           working-directory: 'Actividad 2/devops-practice/'  
+     
+         - name: Run security audit  
+           run: npm audit  
+           working-directory: 'Actividad 2/devops-practice/'
 
-   jobs:
-     build:
-       runs-on: ubuntu-latest
-
-       steps:
-         - name: Checkout code
-           uses: actions/checkout@v2
-
-         - name: Set up Node.js
-           uses: actions/setup-node@v2
-           with:
-             node-version: '14'
-
-         - name: Install dependencies
-           run: npm install
-
-         - name: Run tests
-           run: npm test
-
-         - name: Run security audit
-           run: npm audit
    ```
+Hay que señalar que se agrega `working-directory` para configurar el directorio en el flujo de trabajo, pues a diferencia de la actividad 1, ahora hay sub-carpetas que contienen a cada actividad.
 
 ## 3. Implementación de Infraestructura como Código (IaC)
 

@@ -1,19 +1,32 @@
-# Preguntas de reflexión:
+# Preguntas de reflexión
 
-• Pregunta 1: ¿Por qué surgió la necesidad de DevOps en el desarrollo de software?
+**• Pregunta 1: ¿Por qué surgió la necesidad de DevOps en el desarrollo de software?**
 
-• Pregunta 2: Explica cómo la falta de comunicación y coordinación entre los equipos de
-desarrollo y operaciones en el pasado ha llevado a la creación de DevOps.
+La necesidad de DevOps surgió debido a la falta de integración entre los equipos de desarrollo y operaciones, lo que causaba problemas en la entrega de software. Antes, el desarrollo de software era estático, pero ahora requiere actualizaciones constantes y gestión continua.
 
-• Pregunta 3: Describe cómo el principio de mejora continua afecta tanto a los aspectos
-técnicos como culturales de una organización.
+---
 
-• Pregunta 4: ¿Qué significa que DevOps no se trata solo de herramientas, individuos o
-procesos?
+**• Pregunta 2: Explica cómo la falta de comunicación y coordinación entre los equipos de desarrollo y operaciones en el pasado ha llevado a la creación de DevOps.**
 
-• Pregunta 5: Según el texto, ¿cómo contribuyen los equipos autónomos y multifuncionales a
-una implementación exitosa de DevOps?
+Los equipos trabajaban en silos con objetivos y herramientas diferentes, lo que generaba conflictos durante las implementaciones. El equipo de desarrollo buscaba agregar nuevas características, mientras que operaciones priorizaba la estabilidad del sistema. La falta de comunicación y coordinación llevó a la creación de DevOps como un enfoque para unir ambos equipos y alinear sus objetivos.
 
+---
+
+**• Pregunta 3: Describe cómo el principio de mejora continua afecta tanto a los aspectos técnicos como culturales de una organización.**
+
+La mejora continua en DevOps mejora la eficiencia técnica mediante la automatización y el análisis de métricas. También promueve un entorno colaborativo que elimina silos, fomenta la responsabilidad y el aprendizaje, y mejora la experiencia del desarrollador. El enfoque basado en ciclos de retroalimentación asegura que las organizaciones puedan ajustarse rápidamente a los cambios y mantenerse competitivas.
+
+---
+
+**• Pregunta 4: ¿Qué significa que DevOps no se trata solo de herramientas, individuos o procesos?**
+
+DevOps no se trata solo de herramientas, individuos o procesos porque, aunque estas son partes importantes, el éxito de DevOps depende de un cambio cultural dentro de la organización. No se trata solo de implementar herramientas o asignar roles específicos, sino de un cambio cultural que elimine la fricción entre los silos y mejore la colaboración y la eficiencia.
+
+---
+
+**• Pregunta 5: Según el texto, ¿cómo contribuyen los equipos autónomos y multifuncionales a una implementación exitosa de DevOps?**
+
+Los equipos autónomos y multifuncionales son esenciales para DevOps porque integran diversas habilidades, eliminan cuellos de botella y agilizan el flujo de trabajo. Esto fomenta una cultura de colaboración y propiedad, fundamentales para el éxito de DevOps.
 # Documentación del proceso de la actividad
 
 ## 1. Configuración del Entorno
@@ -51,7 +64,8 @@ Para iniciar el proyecto de Node.js, seguimos estos pasos:
 - `tests/app.test.js`: Contendrá las pruebas para la API.
   
 5. **Implementar la API REST en `src/app.js`:**
-	Aquí se implementa un servidor básico con Express, además, corregimos un error: 
+	
+ 	Aquí se implementa un servidor básico con Express, además, corregimos un error: 
 	Faltaban las comillas simples en el mensaje de `console.log()`
 
     ```javascript

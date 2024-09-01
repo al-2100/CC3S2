@@ -1,4 +1,4 @@
-![test-actividad1](https://github.com/user-attachments/assets/c1305568-fff0-4214-924a-58b1eeea8f86)# Preguntas de reflexión
+# Preguntas de reflexión
 
 **• Pregunta 1: ¿Por qué surgió la necesidad de DevOps en el desarrollo de software?**
 

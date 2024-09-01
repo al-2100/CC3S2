@@ -1,4 +1,4 @@
-# Preguntas de reflexión
+![test-actividad1](https://github.com/user-attachments/assets/c1305568-fff0-4214-924a-58b1eeea8f86)# Preguntas de reflexión
 
 **• Pregunta 1: ¿Por qué surgió la necesidad de DevOps en el desarrollo de software?**
 
@@ -326,3 +326,60 @@ El proceso incluyó la creación de un entorno de desarrollo con Node.js, la imp
 
 En resumen, al automatizar el proceso de construcción, pruebas y despliegue, y al estandarizar el entorno con Docker, el pipeline automatizado facilita una colaboración más eficaz entre los equipos de desarrollo y operaciones.
 
+## 5. Correciones y consideraciones finales
+
+Después de completar la actividad y subirla finalizada a GitHub, se realizaron las siguientes observaciones y ajustes en este orden:
+
+1. Se agregó la configuración para los directorios en el flujo de trabajo en `.github/workflows/ci.yml`.
+   ```yaml
+   name: CI/CD Pipeline
+
+	on:
+	  push:
+	    branches:
+	      - main
+	  pull_request:
+	    branches:
+	      - main
+	
+	jobs:
+	  build:
+	    runs-on: ubuntu-latest
+
+	    steps:
+	      - name: Checkout code
+	        uses: actions/checkout@v2
+	      
+	      - name: Set up Node.js
+	        uses: actions/setup-node@v2
+	        with:
+	          node-version: '14'
+	      
+	      - name: Install dependencies
+	        run: npm install
+	        working-directory: 'Actividad 1/devops-practice/'
+	      
+	      - name: Run tests
+	        run: npm test
+	        working-directory: 'Actividad 1/devops-practice/'
+	      
+	      - name: Build Docker image
+	        run: docker build -t devops-practice .
+	        working-directory: 'Actividad 1/devops-practice/'
+	      
+	      - name: Run Docker container
+	        run: docker run -d -p 3000:3000 devops-practice
+	        working-directory: 'Actividad 1/devops-practice/'
+   ```
+3. Se observa que el workflow no pasa de `run tests` a pesar que pasa el test
+   
+   ![test-actividad1](https://github.com/user-attachments/assets/5f501760-10fd-4593-b310-115921900e86)
+
+5. Se modifica app.js y app.test.js para que se cierre correctamente el test
+
+   ![test2](https://github.com/user-attachments/assets/11e8262c-1bc0-4834-b2a8-350e89023f77)
+   ![app2](https://github.com/user-attachments/assets/a658aa70-abc1-4b76-99df-71de07c927de)
+   
+6. Funciona
+   
+   ![fix-actividad1](https://github.com/user-attachments/assets/e2809c7e-32b7-430e-90de-47d00cd3ae23)

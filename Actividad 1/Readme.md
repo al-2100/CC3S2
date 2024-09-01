@@ -31,6 +31,24 @@ Los equipos autónomos y multifuncionales son esenciales para DevOps porque inte
 
 ## 1. Configuración del Entorno
 
+Para seguir los pasos de la actividad en Windows, estoy utilizando **WSL (Windows Subsystem for Linux)**. Este subsistema permite ejecutar un entorno de Linux directamente en Windows, facilitando la ejecución de comandos y scripts sin necesidad de modificar los pasos originales de la actividad.
+
+### Configuración de WSL
+Para instalar WSL se siguen estos pasos:
+
+1. **Instalar WSL**: Abrir PowerShell como administrador y ejecuta:
+   ```bash
+   wsl --install
+
+Esto instalará la versión predeterminada de WSL y una distribución de Linux (ubuntu como predeterminado).
+
+2. Acceder al Entorno WSL: Abrir la terminal de Windows (Command Prompt o PowerShell) y ejecutar:
+   ```bash
+   wsl
+![wsl](https://github.com/al-2100/CC3S2/blob/main/Actividad%201/wsl.png)
+
+A continuación, se presenta la lista de pasos a seguir, extraída de la actividad original, junto con explicaciones adicionales.
+
 ### 1.1 Inicialización del Proyecto de Node.js
 
 Para iniciar el proyecto de Node.js, seguimos estos pasos:
@@ -87,7 +105,8 @@ Para iniciar el proyecto de Node.js, seguimos estos pasos:
 - **`app.listen(port, () => {...})`:** Inicia el servidor en el puerto definido, o en el puerto 3000 por defecto.
   
 6. **Escribir un test básico en `tests/app.test.js`:**
-	Se utiliza Jest y Supertest para realizar pruebas sobre el endpoint de la API.
+	
+ 	Se utiliza Jest y Supertest para realizar pruebas sobre el endpoint de la API.
 
     ```javascript
     const request = require('supertest');
@@ -106,7 +125,8 @@ Para iniciar el proyecto de Node.js, seguimos estos pasos:
 - **`expect(res.text).toBe('Hello, World!')`:** Verifica que el texto de la respuesta sea "Hello, World!".
   
 7. **Configurar el script de test en `package.json`:**
-	Modificamos el archivo `package.json` para añadir un script que ejecute las pruebas.
+	
+ 	Modificamos el archivo `package.json` para añadir un script que ejecute las pruebas.
     ```json
     {
         "name": "devops-practice",

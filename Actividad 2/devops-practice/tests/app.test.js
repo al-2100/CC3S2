@@ -3,13 +3,13 @@ const app = require('../src/app');
 describe('GET /', () => {
     let server;
 
-    beforeAll((done) => {
-        server = app.listen(done);
-    });
+    beforeAll(() => {
+        server = app.listen(0)
+    })
 
-    afterAll((done) => {
-        server.close(done);
-    });
+    afterAll(() => {
+        server.close()
+    })
     
     it('should return Hello, World!', async () => {
         const res = await request(app).get('/');

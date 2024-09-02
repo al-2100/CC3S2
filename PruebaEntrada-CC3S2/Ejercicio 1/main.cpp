@@ -36,17 +36,20 @@ void inicializarVertices(struct Grafo* grafo) {
 }
 
 // Función para inicializar las aristas aleatorias
-void inicializarAristas(struct Grafo* grafo) {
+void inicializarAristas(struct Grafo* grafo, bool flag) {
     srand(time(NULL));
 
     for (int i = 0; i < grafo->numAristas; i++) {
         int origen = rand() % grafo->numVertices; // Vértice origen aleatorio
-        int destino;
+        int destino, peso;
         do {
             destino = rand() % grafo->numVertices; // Evitar bucles
         } while (destino == origen);
-
-        int peso = rand() % 100 + 1; // Peso aleatorio entre 1 y 100
+        if (!flag) {
+            peso = rand() % 100 + 1; // Peso aleatorio entre 1 y 100
+        } else {
+            peso = rand() % 200 - 100; // Peso aleatorio entre -100 y 100
+        }
 
         grafo->aristas[i].origen = &grafo->vertices[origen];
         grafo->aristas[i].destino = &grafo->vertices[destino];
@@ -108,19 +111,21 @@ void algoritmoDijkstra(struct Grafo* grafo, struct Vertice* inicial) {
 
 int main() {
     int n, m;
-
+    bool flag = true;
     //Pedir el numero de vertices y aristas
     std::cout<<"Ingrese el numero de vertices: ";
     std::cin>>n;
     std::cout<<"Ingrese el numero de aristas: ";
     std::cin>>m;
-
+    //Preguntar si se permiten aristas negativas
+    std::cout<<"Desea permitir aristas negativas? (1: Si, 0: No): ";
+    std::cin>>flag;
     // Crear un grafo aleatorio n vértices y m aristas
     struct Grafo grafo = {n, m};
 
     // Inicializar los vértices y aristas
     inicializarVertices(&grafo);
-    inicializarAristas(&grafo);
+    inicializarAristas(&grafo, flag);
 
     // Ejecutar el algoritmo de Dijkstra desde el vértice 0
     algoritmoDijkstra(&grafo, &grafo.vertices[0]);

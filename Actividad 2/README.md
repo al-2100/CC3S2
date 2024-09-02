@@ -3,39 +3,40 @@
 **• Pregunta 1: ¿Qué significa "desplazar a la izquierda" en el contexto de DevSecOps y por qué es
 importante?**
 
-
+"Desplazar a la izquierda" en DevSecOps significa integrar la seguridad desde el principio del desarrollo de software, en lugar de esperar hasta el final. Esto ayuda a encontrar y solucionar problemas de seguridad de manera más eficiente, reduciendo costos y riesgos. Al hacerlo, se crea una seguridad proactiva, asegurando que las aplicaciones sean seguras desde el diseño.
 
 ---
 
 **• Pregunta 2: Explica cómo IaC mejora la consistencia y escalabilidad en la gestión de infraestructuras**
 
-
+La Infraestructura como Código (IaC) mejora la consistencia y escalabilidad al definir la infraestructura en código y aplicarla automáticamente. Esto elimina errores manuales y asegura una gestión uniforme en diferentes entornos.
 
 ---
 
 **• Pregunta 3: ¿Cuál es la diferencia entre monitoreo y observabilidad? ¿Por qué es crucial la
 observabilidad en sistemas complejos?**
 
-
+El monitoreo se enfoca en observar elementos predefinidos de un sistema, basándose en reglas y métricas establecidas para detectar problemas conocidos. Por otro lado, la observabilidad ofrece una visión más profunda del sistema al utilizar datos de telemetría como métricas, registros y trazas. En sistemas complejos, la observabilidad es crucial para entender no solo si el sistema falla, sino por qué falla, y para optimizar su rendimiento.
 
 ---
 
 **• Pregunta 4: ¿Cómo puede la experiencia del desarrollador impactar el éxito de DevOps en una
 organización?**
 
-
+La experiencia del desarrollador impacta el éxito de DevOps al promover una cultura próspera. Si los desarrolladores tienen las herramientas adecuadas, un flujo de trabajo eficiente, y sienten que su trabajo es valorado, estarán más motivados y comprometidos, lo que a su vez mejora la colaboración y la comunicación. Esto reduce los silos organizacionales y facilita el éxito de las prácticas DevOps.
 
 ---
 
 **• Pregunta 5: Describe cómo InnerSource puede ayudar a reducir silos dentro de una organización**
 
-
+InnerSource reduce silos al adoptar prácticas de colaboración de código abierto en un entorno corporativo. Fomenta la apertura, transparencia y contribución voluntaria, rompiendo barreras entre departamentos y facilitando la comunicación.
 
 ---
 **• Pregunta 6:  ¿Qué rol juega la ingeniería de plataformas en mejorar la eficiencia y la experiencia del desarrollador?**
 
+La ingeniería de plataformas mejora la eficiencia y experiencia del desarrollador al proporcionar herramientas reutilizables y automatización de operaciones. Esto reduce la carga cognitiva de los desarrolladores y acelera el proceso de desarrollo y despliegue.
 
-# Documentación del Proyecto
+# Documentación del proceso de la actividad
 
 ## 1. Configuración del Entorno
 

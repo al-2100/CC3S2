@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <limits.h>
+#include <stdlib.h>
+#include <time.h>
+#include <iostream>
 
 #define MAX_VERTICES 6
 #define MAX_ARISTAS 11
@@ -32,19 +35,23 @@ void inicializarVertices(struct Grafo* grafo) {
     }
 }
 
-// Función para inicializar las aristas
+// Función para inicializar las aristas aleatorias
 void inicializarAristas(struct Grafo* grafo) {
-    grafo->aristas[0] = (struct Arista){&grafo->vertices[0], &grafo->vertices[1], 41};
-    grafo->aristas[1] = (struct Arista){&grafo->vertices[1], &grafo->vertices[2], 51};
-    grafo->aristas[2] = (struct Arista){&grafo->vertices[2], &grafo->vertices[3], 50};
-    grafo->aristas[3] = (struct Arista){&grafo->vertices[4], &grafo->vertices[3], 36};
-    grafo->aristas[4] = (struct Arista){&grafo->vertices[3], &grafo->vertices[5], 38};
-    grafo->aristas[5] = (struct Arista){&grafo->vertices[3], &grafo->vertices[0], 45};
-    grafo->aristas[6] = (struct Arista){&grafo->vertices[0], &grafo->vertices[5], 29};
-    grafo->aristas[7] = (struct Arista){&grafo->vertices[5], &grafo->vertices[4], 21};
-    grafo->aristas[8] = (struct Arista){&grafo->vertices[1], &grafo->vertices[4], 32};
-    grafo->aristas[9] = (struct Arista){&grafo->vertices[4], &grafo->vertices[2], 32};
-    grafo->aristas[10] = (struct Arista){&grafo->vertices[5], &grafo->vertices[1], 24};
+    srand(time(NULL));
+
+    for (int i = 0; i < grafo->numAristas; i++) {
+        int origen = rand() % grafo->numVertices;
+        int destino;
+        do {
+            destino = rand() % grafo->numVertices;
+        } while (destino == origen);
+
+        int peso = rand() % 100 + 1;
+
+        grafo->aristas[i].origen = &grafo->vertices[origen];
+        grafo->aristas[i].destino = &grafo->vertices[destino];
+        grafo->aristas[i].peso = peso;
+    }
 }
 
 // Función para encontrar el vértice con la distancia mínima no procesado
@@ -100,8 +107,15 @@ void algoritmoDijkstra(struct Grafo* grafo, struct Vertice* inicial) {
 }
 
 int main() {
-    // Crear un grafo con 6 vértices y 11 aristas
-    struct Grafo grafo = {6, 11};
+    int n, m;
+
+    std::cout<<"Ingrese el numero de vertices: ";
+    std::cin>>n;
+    std::cout<<"Ingrese el numero de aristas: ";
+    std::cin>>m;
+
+    // Crear un grafo aleatorio n vértices y m aristas
+    struct Grafo grafo = {n, m};
 
     // Inicializar los vértices y aristas
     inicializarVertices(&grafo);

@@ -40,13 +40,13 @@ void inicializarAristas(struct Grafo* grafo) {
     srand(time(NULL));
 
     for (int i = 0; i < grafo->numAristas; i++) {
-        int origen = rand() % grafo->numVertices;
+        int origen = rand() % grafo->numVertices; // Vértice origen aleatorio
         int destino;
         do {
-            destino = rand() % grafo->numVertices;
+            destino = rand() % grafo->numVertices; // Evitar bucles
         } while (destino == origen);
 
-        int peso = rand() % 100 + 1;
+        int peso = rand() % 100 + 1; // Peso aleatorio entre 1 y 100
 
         grafo->aristas[i].origen = &grafo->vertices[origen];
         grafo->aristas[i].destino = &grafo->vertices[destino];
@@ -109,6 +109,7 @@ void algoritmoDijkstra(struct Grafo* grafo, struct Vertice* inicial) {
 int main() {
     int n, m;
 
+    //Pedir el numero de vertices y aristas
     std::cout<<"Ingrese el numero de vertices: ";
     std::cin>>n;
     std::cout<<"Ingrese el numero de aristas: ";

@@ -202,14 +202,89 @@ En conclusión, cada componente del flujo de trabajo DevSecOps contribuye a un p
 Posterior a la experiencia de la actividad y al subirla finalizada a github, se realizaron las siguientes observaciones y ajustes en este orden:
 
 1. Se observa que el workflow falla
+
    ![directorio](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/directorio.png?raw=true)
-3. Se agregó la configuración para los directorios en el flujo de trabajo en `.github/workflows/ci.yml`, la documentación del paso 2 ya fue actualizada.
-4. Se observa que el workflow no pasa de `run tests` a pesar que pasa el test
+
+2. Se agregó la configuración para los directorios en el flujo de trabajo en `.github/workflows/ci.yml`, la documentación del paso 2 ya fue actualizada.
+3. Se observa que el workflow no pasa de `run tests` a pesar que pasa el test
+
    ![test](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/test.png?raw=true)
-5. Tras muchos intentos se modifica app.js y app.test.js para que se cierre correctamente el test
+
+4. Tras muchos intentos se modifica app.js y app.test.js para que se cierre correctamente el test
+
    ![test2](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/test2.png?raw=true)
    
    ![app2](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/app2.png?raw=true)
-7. Funciona
+
+5. Funciona
    
    ![fix](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/fix.png?raw=true)
+  
+
+6. Al intentar acceder a Grafana mediante localhost:3001, no hay conexión. Después de investigar se detecta que la causa es que Grafana utiliza el puerto 3000 como predeterminado, la solución más rápida en esta actividad es intercambiar los puertos de la app y Grafana.
+   Resultados:
+
+  ![localhost3000](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/localhost3000.png?raw=true)
+
+  ![localhost3001](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/localhost3001.png?raw=true)
+
+  ![localhost9090](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/localhost9090.png?raw=true)
+
+# Ejercicios adicionales
+## Ejercicio 1: Integración continua y DevSecOps
+
+### Teoría 
+
+1. **Lectura**: Revisa el concepto de DevSecOps en el texto proporcionado, poniendo énfasis en el enfoque de "desplazar a la izquierda" y cómo la seguridad se integra en el ciclo de vida del desarrollo de software (SDLC). 
+2. **Pregunta de reflexión**: ¿Por qué es crucial integrar la seguridad desde las primeras fases del desarrollo en lugar de dejarla para el final?
+### Práctica
+
+#### Implementación:
+
+Utilizamos `devops-practice` pues ya es un pipeline de CI/CD que incluye pruebas de seguridad automatizadas utilizando GitHub Actions y posee una herramienta de análisis de seguridad `npm audit`
+
+1. Introducimos una vulnerabilidad intencionada, modificando `package.json`:
+
+```JSON
+{  
+  "name": "devops-practice",  
+  "version": "1.0.0",  
+  "scripts": {  
+    "test": "jest"  
+  },  
+  "dependencies": {  
+    "express": "4.16.0"  //Versión con vulnerabilidades
+  },  
+  "devDependencies": {  
+    "jest": "^27.0.0",  
+    "supertest": "^6.1.3"  
+  }  
+}
+```
+2. Hacemos commit y push para que GitHub Actions se active
+3. Observamos el workflow
+
+	![vulnerabilidad](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/vulnerabilidad.png?raw=true)
+
+4. Revisamos detalles
+
+	![workflow-ej1](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/workflow-ej1.png?raw=true)
+
+#### Evaluación:
+
+- Analiza el impacto de detectar la vulnerabilidad en una fase temprana del desarrollo. ¿Qué hubiera pasado si la vulnerabilidad hubiera llegado a producción? 
+	1. Vulnerabilidad: **Prototype Pollution en `qs`**
+		- **Paquete afectado:** `qs`
+		- **Dependencia de:** `express` y `express > body-parser`
+		- **Descripción:** Esta vulnerabilidad permite que un atacante pueda modificar el prototipo de un objeto, lo que podría llevar a la corrupción de datos o incluso la ejecución de código arbitrario.
+		- **Solución:** Actualizar la dependencia a una versión parcheada. El informe recomienda ejecutar `npm install express@4.19.2` para corregir esta vulnerabilidad.
+	2. Vulnerabilidad: **Open Redirect en Express.js**
+		- **Paquete afectado:** `express`
+		- **Descripción:** Esta vulnerabilidad permite que un atacante pueda redirigir a los usuarios a una URL no deseada, lo que puede ser explotado en ataques de phishing o redirecciones maliciosas.
+		- **Solución:** Actualizar el paquete `express` a una versión parcheada.
+	
+	Detectar vulnerabilidades de seguridad antes de lanzar el código a producción evita ataques que exploten debilidades en entornos públicos. Por ejemplo, la vulnerabilidad de **Prototype Pollution** permitiría a atacantes alterar datos o ejecutar código malicioso. Corregirla antes de lanzar minimiza estos riesgos
+
+- Discute cómo la integración de DevSecOps puede prevenir problemas de seguridad y reducir costos.
+
+	DevSecOps introduce prácticas de seguridad desde el inicio del desarrollo, integrando análisis de seguridad automatizados en cada paso del ciclo de vida del software. La automatización de pruebas de seguridad garantiza una revisión continua y exhaustiva del código y dependencias sin intervención humana, reduciendo errores y acelerando el desarrollo. Los desarrolladores ahorran tiempo y se evitan costos asociados con correcciones urgentes en producción al detectar y corregir vulnerabilidades temprano.

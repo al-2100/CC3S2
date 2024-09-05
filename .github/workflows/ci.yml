@@ -1,65 +1,22 @@
 #Actividad 1
-#name: CI/CD Pipeline
+name: CI/CD Pipeline
 
-#on:
-#  push:
-#    branches:
-#      - main
-#    paths:
-#      - 'Actividad 1/**'
-#  pull_request:
-#    branches:
-#      - main
-#    paths:
-#      - 'Actividad 1/**'
-
-#jobs:
-#  build:
-#    runs-on: ubuntu-latest
-
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#
-#      - name: Set up Node.js
-#        uses: actions/setup-node@v2
-#        with:
-#          node-version: '14'
-
-#      - name: Install dependencies
-#        run: npm install
-#        working-directory: 'Actividad 1/devops-practice/'
-
-#      - name: Run tests
-#        run: npm test
-#        working-directory: 'Actividad 1/devops-practice/'
-
-#      - name: Build Docker image
-#        run: docker build -t devops-practice .
-#        working-directory: 'Actividad 1/devops-practice/'
-
-#      - name: Run Docker container
-#        run: docker run -d -p 3000:3000 devops-practice
-#        working-directory: 'Actividad 1/devops-practice/'
-
-
-# Actividad 2
-name: CI Pipeline
 on:
   push:
     branches:
       - main
     paths:
-      - 'Actividad 2/**'
+      - 'Actividad 1/**'
   pull_request:
     branches:
       - main
     paths:
-      - 'Actividad 2/**'
+      - 'Actividad 1/**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -71,12 +28,55 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: 'Actividad 2/devops-practice/'
+        working-directory: 'Actividad 1/devops-practice/'
 
       - name: Run tests
         run: npm test
-        working-directory: 'Actividad 2/devops-practice/'
+        working-directory: 'Actividad 1/devops-practice/'
 
-      - name: Run security audit
-        run: npm audit
-        working-directory: 'Actividad 2/devops-practice/'
+      - name: Build Docker image
+        run: docker build -t devops-practice .
+        working-directory: 'Actividad 1/devops-practice/'
+
+      - name: Run Docker container
+        run: docker run -d -p 3000:3000 devops-practice
+        working-directory: 'Actividad 1/devops-practice/'
+
+
+# Actividad 2
+#name: CI Pipeline
+#on:
+#  push:
+#    branches:
+#      - main
+#    paths:
+#      - 'Actividad 2/**'
+#  pull_request:
+#    branches:
+#      - main
+#    paths:
+#      - 'Actividad 2/**'
+#
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: Set up Node.js
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: '14'
+#
+#      - name: Install dependencies
+#        run: npm install
+#        working-directory: 'Actividad 2/devops-practice/'
+#
+#      - name: Run tests
+#        run: npm test
+#        working-directory: 'Actividad 2/devops-practice/'
+#
+#      - name: Run security audit
+#        run: npm audit
+#        working-directory: 'Actividad 2/devops-practice/'

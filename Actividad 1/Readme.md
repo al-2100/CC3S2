@@ -69,8 +69,10 @@ Para iniciar el proyecto de Node.js, seguimos estos pasos:
 3. **Instalar las dependencias necesarias:**
 
     ```bash
-    npm install express jest
+    npm install express jest supertest
     ```
+  
+    A diferencia de las instrucciones originales, agregamos `supertest`.
 
 4. **Crear la estructura del proyecto:**
 
@@ -143,6 +145,12 @@ Para iniciar el proyecto de Node.js, seguimos estos pasos:
         }
     }
     ```
+  8. Probamos que el test funcione
+      ```bash
+        npm test
+      ```
+  
+![npmtest](https://github.com/al-2100/CC3S2/blob/main/Actividad%201/npmtest.png)
 
 ## 2. Pipeline CI/CD
 
@@ -246,6 +254,8 @@ Docker permite contenerizar la aplicación y desplegarla en diferentes entornos 
         docker run -p 3000:3000 devops-practice
         ```
 
+        ![dockerrun](https://github.com/al-2100/CC3S2/blob/main/Actividad%201/dockerrun.png)
+
 2. **Automatizar el despliegue con GitHub Actions:**
 
     - **Actualizamos el archivo `.github/workflows/ci.yml` para construir y desplegar la imagen de Docker:**
@@ -288,7 +298,8 @@ Docker permite contenerizar la aplicación y desplegarla en diferentes entornos 
 3. **Verificamos que la aplicación se despliegue correctamente localmente usando Docker:**
 
     - Abrimos un navegador web y accedemos a [http://localhost:3000](http://localhost:3000) para verificar que la aplicación esté funcionando.
-![screenshot1](https://github.com/al-2100/CC3S2/blob/main/Actividad%201/screenshot1.png)
+
+  ![screenshot1](https://github.com/al-2100/CC3S2/blob/main/Actividad%201/screenshot1.png)
 ## 3. Automatización
 
 ### 3.1 Automatiza la Configuración y Gestión del Entorno Local usando Docker Compose
@@ -371,15 +382,15 @@ Después de completar la actividad y subirla finalizada a GitHub, se realizaron 
 	        run: docker run -d -p 3000:3000 devops-practice
 	        working-directory: 'Actividad 1/devops-practice/'
    ```
-3. Se observa que el workflow no pasa de `run tests` a pesar que pasa el test
+2. Se observa que el workflow no pasa de `run tests` a pesar que pasa el test
    
    ![test-actividad1](https://github.com/user-attachments/assets/5f501760-10fd-4593-b310-115921900e86)
 
-5. Se modifica app.js y app.test.js para que se cierre correctamente el test
+3. Se modifica app.js y app.test.js para que se cierre correctamente el test
 
    ![test2](https://github.com/user-attachments/assets/11e8262c-1bc0-4834-b2a8-350e89023f77)
    ![app2](https://github.com/user-attachments/assets/a658aa70-abc1-4b76-99df-71de07c927de)
    
-6. Funciona
+4. Funciona
    
    ![fix-actividad1](https://github.com/user-attachments/assets/e2809c7e-32b7-430e-90de-47d00cd3ae23)

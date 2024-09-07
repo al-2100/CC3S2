@@ -5,8 +5,9 @@ services:
     ports:
       - "3001:3001"
     environment:
-      - NODE_ENV=production
-
+      - NODE_ENV=production  # Modo producción
+      #- NODE_ENV=development
+      #- DEBUG=true  # Habilitar debugging
   prometheus:
     image: prom/prometheus
     volumes:

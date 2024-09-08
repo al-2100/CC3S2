@@ -288,3 +288,109 @@ Utilizamos `devops-practice` pues ya es un pipeline de CI/CD que incluye pruebas
 - Discute cómo la integración de DevSecOps puede prevenir problemas de seguridad y reducir costos.
 
 	DevSecOps introduce prácticas de seguridad desde el inicio del desarrollo, integrando análisis de seguridad automatizados en cada paso del ciclo de vida del software. La automatización de pruebas de seguridad garantiza una revisión continua y exhaustiva del código y dependencias sin intervención humana, reduciendo errores y acelerando el desarrollo. Los desarrolladores ahorran tiempo y se evitan costos asociados con correcciones urgentes en producción al detectar y corregir vulnerabilidades temprano.
+
+## Ejercicio 2: Infraestructura como código y gestión de configuración
+### Teoría
+
+1. **Lectura**: Repasa la sección sobre Infraestructura como Código (IaC) en el texto, enfocándote en cómo IaC mejora la reproducibilidad y reduce errores en la gestión de infraestructuras.
+2. **Pregunta de reflexión**: ¿Cuáles son las ventajas y desventajas de usar IaC en comparación con la configuración manual de infraestructuras?
+- IaC ofrece consistencia, escalabilidad y automatización, ideal para infraestructuras grandes y dinámicas. Sin embargo, la curva de aprendizaje es alta y el tiempo inicial para escribir los scripts de IaC puede ser mayor que la configuración manual rápida, especialmente para pequeñas infraestructuras.
+- La configuración manual es rápida para pequeñas infraestructuras, pero es propensa a errores y difícil de replicar o escalar correctamente.
+### Práctica
+
+1. **Implementación**:
+   - Se vuelve a utilizar `devops-practice` pues ya está configurado
+   - Se debe modificar la variable de entorno `NODE_ENV`: 
+	   - `development`: Indica que la app está en un entorno de desarrollo. En este modo, puede habilitar funciones útiles como logs detallados, mensajes de error completos, y ciertas herramientas para desarrolladores.
+	   - `production`: Indica que la app está en un entorno de producción. En este modo, la app suele estar optimizada, con menos logs y mensajes de error genéricos para mejorar la seguridad y el rendimiento. 
+   - Se modifica `app.js` para identificar el tipo de entorno
+
+      ```javascript
+      if (debug) {  
+          console.log('Debugging is enabled');  
+      } else {  
+          console.log('Running in production mode');  
+      }
+      ```
+
+2. **Simulación**:
+	-  Realiza un despliegue primero en un entorno de desarrollo y luego en producción.
+		  - En desarrollo agregamos debugging:
+		```yaml
+		environment:  
+		  - NODE_ENV=development  # Modo desarrollo  
+		  - DEBUG=true  # Habilitar debugging
+		```
+
+		- Despiegue en desarrollo:
+
+			![debug](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/debug.png?raw=true)
+
+		- Despliegue en producción:
+
+			![[production.png]](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/production.png?raw=true)
+
+	  - Introduce un cambio en la configuración (como cambiar el puerto o una variable de entorno) y despliega nuevamente.
+		 - Cambiamos el puerto a 4000
+
+			 ![[4000.png]](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/4000.png?raw=true)
+
+3. **Evaluación**:
+   - Compara la consistencia entre los entornos. ¿Cómo asegura IaC que ambos entornos se mantengan alineados?
+	IaC (Infraestructura como Código) permite que tanto el entorno de desarrollo como el de producción se configuren de la misma forma usando archivos como `docker-compose.yml`. Al tener un archivo que describe cómo levantar la infraestructura, siempre se garantiza que los entornos se configuren igual. Si haces cambios (como agregar servicios o cambiar puertos), solo ajustas el archivo una vez y lo aplicas a ambos entornos, manteniéndolos consistentes.
+   - Discute cómo IaC ayuda a escalar aplicaciones en diferentes entornos.
+	IaC hace que escalar sea mucho más fácil porque todo está automatizado. Si necesitas más capacidad (por ejemplo, más instancias de la app), puedes simplemente modificar el archivo de configuración para agregar más contenedores o servicios, y estos se desplegarán automáticamente. En lugar de configurar manualmente cada servidor, IaC te permite hacer estos cambios de manera rápida y sin errores.
+
+# Ejercicio 3: Observabilidad y monitoreo avanzado
+
+## Teoría
+1. **Lectura**: Lee la sección sobre Observabilidad en el texto, entendiendo la diferencia entre monitoreo tradicional y observabilidad.
+2. **Pregunta de reflexión**: ¿Cómo puede la observabilidad mejorar la resolución de problemas en sistemas distribuidos o microservicios?
+## Práctica
+
+1. **Implementación**:
+	Reutilizamos `devops-practice` y modificamos app.js para generar logs detallados y recolectar métricas (al ser tan grandes los cambios mejor revisar `app.js` que se encuentra bien comentado).
+	- `winston` se utiliza para registrar eventos y actividades en la aplicación
+	- `prom-client` es una librería que permite exponer métricas de rendimiento de la aplicación que pueden ser recolectadas por Prometheus.
+2. **Experimentación**:
+   - Se introduce un tiempo de respuesta lento en `metrics`
+```javascript
+// Simulando un retraso en el endpoint /metrics  
+app.get('/metrics', async (req, res) => {  
+    logger.info('Solicitud a /metrics con retraso simulado');  
+  
+    // Simulamos un retraso de 3 segundos antes de responder  
+    setTimeout(async () => {  
+        res.set('Content-Type', promClient.register.contentType);  
+        res.end(await promClient.register.metrics());  
+        logger.info('Métricas enviadas después de un retraso');  
+    }, 3000);  // Retraso de 3 segundos  
+});
+```
+ - Se configura una alerta en Grafana que se activen cuando el promedio de respuesta en `metrics` sea mayor a 0.2s en un minuto. A continuación los pasos:
+	 1. Agregamos a **Prometheus** como data source en **Grafana**
+		 ![[datasource.png]](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/datasource.png?raw=true)
+		 
+		 ![[datasource2.png]](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/datasource2.png?raw=true)
+		 
+	2. Creamos un dashboard con el data source y agregamos la query:
+		`histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[1m])) by (le, route))`
+		
+		![[dashboard3.png]](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/dashboard3.png?raw=true)
+		
+	3. Creamos la alerta en el panel
+		![[alerta.png]](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/alerta.png?raw=true)
+		![[alerta2.png]](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/alerta2.png?raw=true)
+		
+	4. Observamos nuestro dashboard antes y después de introducir la falla a ser detectada
+		
+		![[dashboard4.png]](https://github.com/al-2100/CC3S2/blob/main/Actividad%202/imagenes/dashboard4.png?raw=true)
+		
+3. **Evaluación**:
+   - Discute cómo la observabilidad permite identificar problemas que no serían evidentes con un monitoreo tradicional.
+
+	  La **observabilidad** nos permite ver mucho más a fondo cómo está funcionando un sistema que solo con el **monitoreo tradicional**. En el monitoreo tradicional, solo observamos cosas básicas como si un servidor está encendido o el uso de CPU, pero no siempre nos dice por qué algo va mal. Con la observabilidad, podemos mirar más detalles y encontrar problemas que no son tan evidentes a primera vista.
+	
+   - Reflexiona sobre la importancia de las métricas, logs y trazas en la gestión de sistemas modernos.
+
+	  Las **métricas** nos muestran números sobre el rendimiento del sistema, como tiempos de respuesta o uso de recursos; los **logs** son como un diario que registra lo que ocurre en la aplicación, ayudándonos a ver errores y eventos clave; y las **trazas** nos permiten seguir el camino de una solicitud a través de varios servicios, viendo dónde puede estar el problema. Juntos, estos tres elementos nos dan una visión clara y detallada del sistema para encontrar y resolver problemas de forma más precisa y eficaz.

@@ -7,7 +7,7 @@ services:
     environment:
       - NODE_ENV=production  # Modo producción
       #- NODE_ENV=development
-      #- DEBUG=true  # Habilitar debugging
+      - DEBUG=true  # Habilitar debugging
   prometheus:
     image: prom/prometheus
     volumes:

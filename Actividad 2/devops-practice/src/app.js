@@ -53,10 +53,16 @@ app.get('/status', (req, res) => {
     res.json({ status: 'ok' });
 });
 
-// Endpoint para exponer métricas de Prometheus
+// Simulando un retraso en el endpoint /metrics
 app.get('/metrics', async (req, res) => {
-    res.set('Content-Type', promClient.register.contentType);
-    res.end(await promClient.register.metrics());
+    logger.info('Solicitud a /metrics con retraso simulado');
+
+    // Simulamos un retraso de 3 segundos antes de responder
+    setTimeout(async () => {
+        res.set('Content-Type', promClient.register.contentType);
+        res.end(await promClient.register.metrics());
+        logger.info('Métricas enviadas después de un retraso');
+    }, 3000);  // Retraso de 3 segundos
 });
 
 module.exports = app;

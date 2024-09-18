@@ -1,9 +1,9 @@
 # Sobre la Actividad
 
 ## Documentación
-Primero se muestra la lista de pasos y los comandos ejecutados para cada parte de la actividad, esto va acompañado de screenshots de la consola para cada parte. Muchas de las partes contienen comandos distintos o extras a diferencia de las instrucciones originales, pues la actividad no funcionaba solo copiando y pegando.
+Se presenta una lista detallada de los pasos seguidos y los comandos ejecutados para cada parte, al final de cada una se incluyen capturas de pantalla de la consola para mostrar los resultados obtenidos. En varios casos, se utilizaron comandos adicionales o variantes de los indicados en las instrucciones originales, ya que la actividad no se completaba únicamente con los comandos proporcionados.
 ## Manejo de repositorios
-En este caso, como se usaban tags en la parte 6. Se decidió crear un repositorio distinto y adjuntarlo usando submódulos a CC3S2.
+Dado que se usaban tags en la parte 6, se optó por crear un repositorio separado para gestionar estos elementos. Este repositorio se adjuntó al proyecto principal (CC3S2) mediante submódulos.
 
 ---
 # Actividad 6

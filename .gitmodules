@@ -1,0 +1,6 @@
+[submodule "Actividad 5/scrum-project"]
+	path = Actividad 5/scrum-project
+	url = https://github.com/al-2100/scrum-project.git
+[submodule "Actividad 6/proyecto-colaborativo"]
+	path = Actividad 6/proyecto-colaborativo
+	url = https://github.com/al-2100/proyecto-colaborativo.git

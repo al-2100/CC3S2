@@ -4,3 +4,9 @@
 [submodule "Actividad 6/proyecto-colaborativo"]
 	path = Actividad 6/proyecto-colaborativo
 	url = https://github.com/al-2100/proyecto-colaborativo.git
+[submodule "Actividad7y8"]
+	path = Actividad7y8
+	url = https://github.com/Renato200419/Actividad-7-y-8-Grupal.git
+[submodule "Tarea1-CC3S2"]
+	path = Tarea1-CC3S2
+	url = https://github.com/Renato200419/Tarea1-CC3S2.git

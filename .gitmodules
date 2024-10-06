@@ -10,6 +10,6 @@
 [submodule "Tarea1-CC3S2"]
 	path = Tarea1-CC3S2
 	url = https://github.com/Renato200419/Tarea1-CC3S2.git
-[submodule "Actividad 9/Actividad9"]
-	path = Actividad 9/Actividad-9
+[submodule "Actividad 9/Word-Guessing-Game"]
+	path = Actividad 9/Word-Guessing-Game
 	url = https://github.com/al-2100/Actividad-9.git

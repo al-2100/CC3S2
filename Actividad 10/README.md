@@ -10,10 +10,10 @@ La actividad consistió en implementar un sistema que simula el comportamiento d
    - La clase `Belly` modela el comportamiento del estómago cuando se come una cantidad de pepinos y se espera un tiempo determinado. Esta clase incluye:
      - `comer(pepinos)`: Añade pepinos al estómago, asegurándose de que la cantidad sea válida (entre 1 y 100).
      - `esperar(tiempo_en_horas)`: Aumenta el tiempo de espera en horas.
-     - `esta_gruñendo()`: Retorna `True` si el estómago debe gruñir (más de 10 pepinos y más de 1.5 horas de espera)【103†source】.
+     - `esta_gruñendo()`: Retorna `True` si el estómago debe gruñir (más de 10 pepinos y más de 1.5 horas de espera).
 
 2. **Archivo `environment.py` (Configuración de Behave)**:
-   - Aquí se define la configuración inicial de cada escenario de prueba. El archivo crea una nueva instancia de la clase `Belly` para cada escenario【104†source】.
+   - Aquí se define la configuración inicial de cada escenario de prueba. El archivo crea una nueva instancia de la clase `Belly` para cada escenario.
 
 3. **Archivo `belly_steps.py` (Definición de Pasos de Gherkin)**:
    - Este archivo implementa los pasos (`Given`, `When`, `Then`) que conectan las instrucciones en Gherkin con el código en Python. Se maneja la lógica de:
